@@ -1,7 +1,7 @@
 'use client';
 
 import Loader from '@/components/Loader';
-import { getClerkUsers } from '@/lib/actions/user.action';
+import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.action';
 // import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
 import { ClientSideSuspense, LiveblocksProvider } from '@liveblocks/react/suspense';
@@ -18,15 +18,15 @@ const LBProvider = ({ children }: { children: ReactNode}) => {
 
         return users;
       }}
-      // resolveMentionSuggestions={async ({ text, roomId }) => {
-      //   const roomUsers = await getDocumentUsers({
-      //     roomId,
-      //     currentUser: clerkUser?.emailAddresses[0].emailAddress!,
-      //     text,
-      //   })
+      resolveMentionSuggestions={async ({ text, roomId }) => {
+        const roomUsers = await getDocumentUsers({
+          roomId,
+          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          text,
+        })
 
-      //   return roomUsers;
-      // }}
+        return roomUsers;
+      }}
     >
       <ClientSideSuspense fallback={<Loader />}>
         {children}

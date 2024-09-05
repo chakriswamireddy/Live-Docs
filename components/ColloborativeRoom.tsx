@@ -14,6 +14,7 @@ import Loader from "./Loader";
 import { Input } from "./ui/input";
 import Image from "next/image"; 
 import { updateDocument } from "@/lib/actions/room.action";
+import SharedModal from "./SharedModal";
 
 const ColloborativeRoom = ({ roomId, roomMetadata,users,currentUserType }: CollaborativeRoomProps) => {
 
@@ -118,8 +119,15 @@ const ColloborativeRoom = ({ roomId, roomMetadata,users,currentUserType }: Colla
 
 
             </div>
-
+            
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+            <SharedModal
+              roomId= {roomId}
+              currentUserType={currentUserType}
+              collaborators ={users}
+              creatorId = {roomMetadata.creatorId}
+             />
+
               <ActiveColloborats />
             </div>
 

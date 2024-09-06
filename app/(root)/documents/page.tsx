@@ -1,5 +1,7 @@
 import { AddDocBtn } from '@/components/AddDocBtn'
+import { DeleteModal } from '@/components/DeleteModal'
 import Header from '@/components/Header'
+import Notifications from '@/components/Notifications'
 import { getDocuments } from '@/lib/actions/room.action'
 import { dateConverter } from '@/lib/utils'
 import { SignedIn, UserButton } from '@clerk/nextjs'
@@ -21,7 +23,8 @@ const Home = async () => {
         <main className='home-container'>
             <Header className='sticky left-0 top-0'>
                 <div className="flex items—center gap—2 lg:gap—4">
-                    Notification
+                    
+                    <Notifications />
                     <SignedIn>
                         <UserButton />
                     </SignedIn>
@@ -64,8 +67,9 @@ const Home = async () => {
                                     </div>
 
                                 </Link>
+                            
 
-                                {/* TODO delete btn */}
+                                <DeleteModal roomId={id} />
 
                             </li>
                         ))}

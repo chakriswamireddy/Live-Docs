@@ -15,6 +15,7 @@ import { FloatingComposer, FloatingThreads, LiveblocksPlugin, liveblocksConfig, 
 import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import { useThreads } from '@liveblocks/react/suspense';
 import Comments from '../Comments';
+import { DeleteModal } from '../DeleteModal';
 
 // import Fl
 
@@ -48,14 +49,14 @@ export function Editor({ roomId, currentUserType }: { roomId: string, currentUse
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="editor-container size-full">
+      <div className="editor-container size-full border-2 border-blue-500">
 
         <div className="toolbar-wrapper flex min-w-full justify-between">
           <ToolbarPlugin />
-
+          {currentUserType === 'editor' && <DeleteModal roomId={roomId} />}
         </div>
 
-        <div className="editor—wrapper flex flex—col items—center  justify—start">
+        <div className="editor—wrapper flex flex—col items—center  justify—end border-2">
           {status === 'not-loaded' || status === 'loading' ? <Loader />
             :
             <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">

@@ -5,7 +5,8 @@ import { title } from 'process';
 import { liveblocks } from '../liveblocks';
 import { revalidatePath } from 'next/cache';
 import { getAccessType, parseStringify } from '../utils';
-import { redirect } from 'next/dist/server/api-utils';
+import { redirect } from 'next/navigation';
+// import { redirect } from 'next/dist/server/api-utils';
 
 export const CreateDocument = async ({ userId, email }: CreateDocumentParams) => {
     const roomId = nanoid();
@@ -61,10 +62,9 @@ export const getDocument = async ({ roomId, userId }: { roomId: string, userId: 
     try {
         const room = await liveblocks.getRoom(roomId);
 
-        //TODO-2 make this work 
 
-        // const hasAccess = Object.keys(room.usersAccesses).includes(userId);
-        // if (!hasAccess) throw new Error('You dont have access to this Document')
+        const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+        if (!hasAccess) throw new Error('You dont have access to this Document')
 
         return parseStringify(room);
     } catch (error) {
@@ -77,11 +77,6 @@ export const getDocuments = async ( email: string ) => {
 
     try {
         const rooms = await liveblocks.getRooms({userId:email});
-
-       
-
-        const hasAccess = Object.keys(room.usersAccesses).includes(userId);
-        if (!hasAccess) throw new Error('You dont have access to this Document')
 
         return parseStringify(rooms);
     } catch (error) {
@@ -136,5 +131,18 @@ string, email: string}) => {
         
     } catch (error) {
         console.log("error occured while removing user",error)
+    }
+}
+
+
+export const removeDocument = async (roomId:string) => {
+    try {
+
+        await liveblocks.deleteRoom(roomId);
+        revalidatePath('/');
+        redirect('/')
+        
+    } catch (error) {
+        console.log("error happened while deleting room",error)
     }
 }

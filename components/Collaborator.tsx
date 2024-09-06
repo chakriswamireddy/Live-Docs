@@ -54,6 +54,7 @@ const Collaborator = ({email ,roomId, creatorId,collaborator,user}:CollaboratorP
                 <UserTypeSelector
                     userType={userType as UserType}
                     setUserType={setUserType || ''}
+                    onClickHandler={shareDocumentHandler}
                  />
                  <Button className='' type='button' 
                  onClick={()=> removeCollaboratorHandLer(collaborator.email)}

@@ -23,7 +23,7 @@ const Comments = () => {
   const { threads } = useThreads();
 
   return (
-    <div className="comments-container border-2 border-red-600  justify-self-end" >
+    <div className="comments-container rounded-md shadow-slate-50 self-start justify-self-end" >
       <Composer className="comment-composer" />
 
       {threads.map((thread) => (

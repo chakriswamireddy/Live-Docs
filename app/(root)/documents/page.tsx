@@ -1,5 +1,6 @@
 import { AddDocBtn } from '@/components/AddDocBtn'
 import { DeleteModal } from '@/components/DeleteModal'
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Notifications from '@/components/Notifications'
 import { getDocuments } from '@/lib/actions/room.action'
@@ -99,6 +100,7 @@ const Home = async () => {
 
 
 
+            <Footer/>
 
         </main>
     )

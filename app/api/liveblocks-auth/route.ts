@@ -4,6 +4,11 @@ import { redirect } from "next/navigation"; // For handling redirects
 import { getRandomColor } from "@/lib/utils";
 // import { liveblocks } from "@/lib/liveblocks";
 
+if (!process.env.LIVEBLOCKS_SECRET_KEY) {
+  throw new Error("LIVEBLOCKS_SECRET_KEY is missing");
+}
+
+
 const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY,
 });

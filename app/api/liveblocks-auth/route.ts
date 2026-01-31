@@ -5,7 +5,7 @@ import { getRandomColor } from "@/lib/utils";
 // import { liveblocks } from "@/lib/liveblocks";
 
 const liveblocks = new Liveblocks({
-  secret: "sk_dev_zdXzX_6v1GbMxr0t747qVikYhXLKN4tlqzFukVI_bR6oLANHv9pQa1fhhjVhzlkz",
+  secret: process.env.LIVEBLOCKS_SECRET_KEY,
 });
 
 export async function POST(request: Request) {
